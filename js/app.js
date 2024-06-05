@@ -2,15 +2,27 @@ const taskInput = document.getElementById("task-input");
 const dateInput = document.getElementById("date-input");
 const addButton = document.getElementById("add-button");
 const alertMessage = document.getElementById("alert-message");
+const todosBody = document.querySelector("tbody");
+const deleteAllButton = document.getElementById("delete-all-button");
 
 const todos = JSON.parse(localStorage.getItem("todos")) || [];
 console.log(todos);
+
+// saveToLocalStorage function for Storing todos in local storage
+
+const saveToLocalStorage = () => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
+
+// generateId function for Creating a unique id for each todo
 
 const generateId = () => {
   return Math.round(
     Math.random() * Math.random() * Math.pow(10, 15)
   ).toString();
 };
+
+// showAlert function for Show a success or error message to the user
 
 const showAlert = (message, type) => {
   alertMessage.innerHTML = "";
@@ -25,9 +37,30 @@ const showAlert = (message, type) => {
   }, 2000);
 };
 
-const saveToLocalStorage = () => {
-  localStorage.setItem("todos", JSON.stringify(todos));
+// displayTodos function for Show todos dynamically
+
+const displayTodos = () => {
+  todosBody.innerHTML = "";
+  if (!todos.length) {
+    todosBody.innerHTML = "<tr><td colSpan='4'>No task found!</td></tr>";
+    return;
+  }
+  todos.forEach((todo) => {
+    todosBody.innerHTML += `
+    <tr>
+      <td>${todo.task}</td>
+      <td>${todo.date ? todo.date : "No Date"}</td>
+      <td>${todo.completed ? "Completed" : "Pending"}</td>
+      <td>
+        <button>Edit</button>
+        <button>Do</button>
+        <button>Delete</button>
+      </td>
+    </tr>`;
+  });
 };
+
+// showAlert function for Getting todo values
 
 const addHandler = () => {
   const task = taskInput.value;
@@ -39,9 +72,10 @@ const addHandler = () => {
     completed: false,
   };
 
-  if (task && date) {
+  if (task) {
     todos.push(todo);
     saveToLocalStorage();
+    displayTodos();
     taskInput.value = "";
     dateInput.value = "";
     console.log(todos);
@@ -52,3 +86,5 @@ const addHandler = () => {
 };
 
 addButton.addEventListener("click", addHandler);
+
+// window.addEventListener("load", displayTodos);
