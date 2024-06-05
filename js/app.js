@@ -5,7 +5,7 @@ const alertMessage = document.getElementById("alert-message");
 const todosBody = document.querySelector("tbody");
 const deleteAllButton = document.getElementById("delete-all-button");
 
-const todos = JSON.parse(localStorage.getItem("todos")) || [];
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
 console.log(todos);
 
 // saveToLocalStorage function for Storing todos in local storage
@@ -85,6 +85,17 @@ const addHandler = () => {
   }
 };
 
-addButton.addEventListener("click", addHandler);
+const deleteAllHandler = () => {
+  if (todos.length) {
+    todos = [];
+    saveToLocalStorage();
+    displayTodos();
+    showAlert("All todos cleared successfully", "success");
+  } else {
+    showAlert("No todos to clear", "error");
+  }
+};
 
-// window.addEventListener("load", displayTodos);
+window.addEventListener("load", displayTodos);
+addButton.addEventListener("click", addHandler);
+deleteAllButton.addEventListener("click", deleteAllHandler);
