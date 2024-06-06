@@ -153,6 +153,8 @@ const applyEditHandler = (event) => {
   showAlert("Todo edited successfully", "success");
 };
 
+// filterHandler function for Todo filtering
+
 const filterHandler = (event) => {
   let filteredTodos = null;
   const filter = event.target.dataset.filter;

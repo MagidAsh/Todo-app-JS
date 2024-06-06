@@ -15,7 +15,7 @@
 }
 
 body {
-  max-width: 1000px;
+  width: 1100px;
   margin: auto;
 }
 
@@ -102,6 +102,7 @@ thead th:last-child {
 }
 
 tbody td {
+  width: 25%;
   background-color: var(--color-task);
   padding: 5px 10px;
   text-align: center;
@@ -118,6 +119,7 @@ tbody td button:nth-child(1) {
 
 tbody td button:nth-child(2) {
   background-color: var(--color-success);
+  width: 48px;
 }
 
 tbody td button:nth-child(3) {
