@@ -1,0 +1,1 @@
+The project of adding todos along with the date and having facilities such as deleting all todos and the possibility of editing for each todo, done or not done and deleting each todo and finally filtering the todos based on their status type
